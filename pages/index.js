@@ -33,11 +33,10 @@ const Index = (props) => (
   <Layout>
     <h1>Batman TV Shows</h1>
     <ul>
-      {props.shows.map(({show}) => (
-        <li key={show.id}>
-          <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
-            <a>{show.name}</a>
-          </Link>
+      {props.listings.map((listing) => (
+        <li key={listing.listing_id}>
+					<span>{listing.listing_id}</span><br/>
+					<span>{listing.building_address}</span>
         </li>
       ))}
     </ul>
@@ -68,13 +67,16 @@ const Index = (props) => (
 )
 
 Index.getInitialProps = async function() {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
+
+	const res = await fetch('http://jj.local.cityrealty.com/rpc/search/get-sale-listings?f%5B%5D=priceRangeSale&f%5B%5D=location&f%5B%5D=bedroomFullMulti&f%5B%5D=saleBuildingTypeMulti&f%5B%5D=doorman&f%5B%5D=inContract&f%5B%5D=dateListed&f%5B%5D=priceChange&f%5B%5D=searchTerm&f%5B%5D=subHoods&s%5B%5D=salePrice&s%5B%5D=dateListed&s%5B%5D=ppsqft&s%5B%5D=neighborhood2&s%5B%5D=type2&type=json&uniqueid=1541713539344')
+  // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
   const data = await res.json()
 
-  console.log(`Show data fetched. Count: ${data.length}`)
+
+  console.log(`Show data fetched. Count: ${data.items.length}`)
 
   return {
-    shows: data
+    listings: data.items
   }
 }
 
