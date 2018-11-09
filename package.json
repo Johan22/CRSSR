@@ -26,5 +26,10 @@
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-markdown": "^4.0.3"
+  },
+  "devDependencies": {
+    "node-sass": "^4.10.0",
+    "styled-jsx-plugin-sass": "^0.3.0"
   }
+
 }

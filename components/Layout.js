@@ -1,14 +1,16 @@
 import Header from './Header'
+import Stalker from './Stalker'
 
 const layoutStyle = {
-  margin: 20,
   padding: 20,
-  border: '1px solid #DDD'
+  border: '0px solid #DDD',
+	margin: '60px auto',
+	width: 1004
 }
 
 const Layout = (props) => (
   <div style={layoutStyle}>
-    <Header />
+		<Stalker />
     {props.children}
   </div>
 )

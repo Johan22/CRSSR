@@ -31,7 +31,7 @@ import fetch from 'isomorphic-unfetch'
 
 const Index = (props) => (
   <Layout>
-    <h1>Batman TV Shows</h1>
+    <h1>Apartments For Sale - Search Results</h1>
     <ul>
       {props.listings.map((listing) => (
         <li key={listing.listing_id}>
