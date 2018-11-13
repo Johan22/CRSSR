@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import Header from '../components/Header.js'
 import Layout from '../components/Layout.js'
+import Listing from '../components/Listing.js'
 
 import fetch from 'isomorphic-unfetch'
 
@@ -32,12 +33,16 @@ import fetch from 'isomorphic-unfetch'
 const Index = (props) => (
   <Layout>
     <h1>Apartments For Sale - Search Results</h1>
+
     <ul>
       {props.listings.map((listing) => (
         <li key={listing.listing_id}>
 					<span>{listing.listing_id}</span><br/>
 					<span>{listing.building_address}</span>
+
+					<Listing listing={listing}></Listing>
         </li>
+
       ))}
     </ul>
 		<style jsx>{`
