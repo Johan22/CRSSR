@@ -34,17 +34,14 @@ const Index = (props) => (
   <Layout>
     <h1>Apartments For Sale - Search Results</h1>
 
-    <ul>
+    <div>
       {props.listings.map((listing) => (
-        <li key={listing.listing_id}>
-					<span>{listing.listing_id}</span><br/>
-					<span>{listing.building_address}</span>
-
+        <div className="listing-container" key={listing.listing_id}>
 					<Listing listing={listing}></Listing>
-        </li>
+        </div>
 
       ))}
-    </ul>
+    </div>
 		<style jsx>{`
       h1, a {
         font-family: "Arial";
@@ -54,9 +51,9 @@ const Index = (props) => (
         padding: 0;
       }
 
-      li {
-        list-style: none;
-        margin: 5px 0;
+      .listing-container {
+        border-top: 1px solid #ccc;
+				padding: 20px 0;
       }
 
       a {
