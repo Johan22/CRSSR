@@ -97,8 +97,19 @@ const Stalker = () => (
 
 
 <ul className="nav clearfix" data-location="stalker">
+  <li className="">
+    <Link href="/">
+      <a>
+        <span data-sub-nav="1">CITYREALTY</span>
+      </a>
+    </Link>
+  </li>
 	<li className="selected">
+    <Link href="/search">
+      <a>
         <span data-sub-nav="1">Buy</span>
+      </a>
+    </Link>
 	</li>
 
 	<li className="">
@@ -121,7 +132,7 @@ const Stalker = () => (
 
 
 <div className="w_user_tools clearfix">
-					<div className="tool recent_searches _has_dropdown" ng-className="{'_with_agent': !!agent}" ng-show="items.length > 0" cr-nav-recent-searches="" data-rpc-url="/rpc/search/recent-searches" data-delete-item-url="/rpc/search/recent-search-delete" data-delete-all-url="/rpc/search/recent-searches-delete-all" data-recent-search-url="/nyc/recent-search">
+					<div className="tool recent_searches _has_dropdown" cr-nav-recent-searches="" data-rpc-url="/rpc/search/recent-searches" data-delete-item-url="/rpc/search/recent-search-delete" data-delete-all-url="/rpc/search/recent-searches-delete-all" data-recent-search-url="/nyc/recent-search">
 			<div className="agent ng-hide" ng-show="!!agent">
 				<span className="tooltip ng-binding"></span>
 			</div>
@@ -164,8 +175,8 @@ const Stalker = () => (
 				<div className="tool search ">
 			<form className="w_limousine _any ng-pristine ng-valid" method="GET" data-submit="/building/search?query=" data-rpc="/rpc/autocomplete-search?properties=1">
 	<div className="background">
-		<input type="text" className="w_limousine_autocomplete _behind" autocomplete="off" disabled="" value="" />
-		<input type="text" className="w_limousine_autocomplete _front" name="query" title="Search by Neighborhood / Address" self-overtext="true" data-overtext="Search by Neighborhood / Address" autocomplete="off" placeholder="Search by Neighborhood / Address" />
+		<input type="text" className="w_limousine_autocomplete _behind" autoComplete="off" disabled="" value="" />
+		<input type="text" className="w_limousine_autocomplete _front" name="query" title="Search by Neighborhood / Address" self-overtext="true" data-overtext="Search by Neighborhood / Address" autoComplete="off" placeholder="Search by Neighborhood / Address" />
 
 				<span className="w_limousine_btn_container">
 			<input type="submit" className="w_limousine_btn" name="" value="" />
