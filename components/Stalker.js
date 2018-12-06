@@ -587,7 +587,6 @@ const Stalker = () => (
 					float: left;
 					list-style-type: none;
 					white-space: nowrap;
-					margin-left: 25px;
 					font-weight: bold;
 				}
 

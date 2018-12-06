@@ -1,13 +1,22 @@
 import Layout from '../components/Layout.js'
 import fetch from 'isomorphic-unfetch'
 import Listing from '../components/Listing.js'
+import Filters from '../components/Filters.js'
 
 const Search = (props) => (
     <Layout>
       <h1>Apartments For Sale - Search Results</h1>
 
+
       <div>
-        {props.listings.map((listing) => (
+        <Filters
+          filters={props.data.tableTools.filters}
+        >
+        </Filters>
+      </div>
+
+      <div>
+        {props.data.items.map((listing) => (
           <div className="listing-container" key={listing.listing_id}>
             <Listing listing={listing}></Listing>
           </div>
@@ -50,7 +59,7 @@ Search.getInitialProps = async function() {
   console.log(`Show data fetched. Count: ${data.items.length}`)
 
   return {
-    listings: data.items
+    data
   }
 }
 
