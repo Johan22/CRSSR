@@ -7,23 +7,38 @@ import Filters from '../components/Filters.js'
 class Search extends React.Component {
   constructor(props) {
     super(props);
+		this.state = {};
+		this.state.test = "plop";
+		this.state.donnees = {};
+		this.state.showPropsData = true;
+		this.loadResults();
   }
 
-  async loadOtherResults() {
-    console.log('loadOtherResults');
+	async loadResults() {
 
-    const res = await fetch('http://dev.cityrealty.com/rpc/search/get-sale-listings?f%5B%5D=priceRangeSale&f%5B%5D=location&f%5B%5D=bedroomFullMulti&f%5B%5D=saleBuildingTypeMulti&f%5B%5D=doorman&f%5B%5D=inContract&f%5B%5D=dateListed&f%5B%5D=priceChange&f%5B%5D=searchTerm&f%5B%5D=subHoods&s%5B%5D=salePrice&s%5B%5D=dateListed&s%5B%5D=ppsqft&s%5B%5D=neighborhood2&s%5B%5D=type2&type=json&uniqueid=1548455410809')
-    const data = await res.json()
-    // this.props.data = data;
+		// this.setState({
+    //   test: "plop2"
+    // });
+	}
+
+  async loadOtherResults() {
+		let res = await fetch('https://aac9da40-35c0-4e8c-aab3-045c28aca076.mock.pstmn.io/listings6')
+		this.setState({
+			donnees: await res.json()
+		});
+
+		this.setState({
+			showPropsData: false
+		});
   }
 
   render() {
     return (
       <Layout>
-        <h1>Apartments For Sale - Search Results</h1>
+        <h1>Apartments For Sale - Search Results {this.state.test}</h1>
 
         <div>
-          <button onClick={this.loadOtherResults}>
+          <button onClick={this.loadOtherResults.bind(this)}>
             Load Other Results
           </button>
           <Filters
@@ -33,7 +48,14 @@ class Search extends React.Component {
         </div>
 
         <div>
-          {this.props.data.items.map((listing) => (
+					{this.state.donnees.items && this.state.donnees.items.map((listing) => (
+						<div className="listing-container" key={listing.listing_id}>
+							<Listing listing={listing}></Listing>
+						</div>
+
+					))}
+
+          {this.state.showPropsData && this.props.data.items.map((listing) => (
             <div className="listing-container" key={listing.listing_id}>
               <Listing listing={listing}></Listing>
             </div>
@@ -71,21 +93,20 @@ class Search extends React.Component {
 
 Search.getInitialProps = async function() {
 
-	const res = await fetch('http://jj.local.cityrealty.com/rpc/search/get-sale-listings?f%5B%5D=priceRangeSale&f%5B%5D=location&f%5B%5D=bedroomFullMulti&f%5B%5D=saleBuildingTypeMulti&f%5B%5D=doorman&f%5B%5D=inContract&f%5B%5D=dateListed&f%5B%5D=priceChange&f%5B%5D=searchTerm&f%5B%5D=subHoods&s%5B%5D=salePrice&s%5B%5D=dateListed&s%5B%5D=ppsqft&s%5B%5D=neighborhood2&s%5B%5D=type2&type=json&uniqueid=1541713539344')
-  // const res = await fetch('http://dev.cityrealty.com/rpc/search/get-sale-listings?f%5B%5D=priceRangeSale&f%5B%5D=location&f%5B%5D=bedroomFullMulti&f%5B%5D=saleBuildingTypeMulti&f%5B%5D=doorman&f%5B%5D=inContract&f%5B%5D=dateListed&f%5B%5D=priceChange&f%5B%5D=searchTerm&f%5B%5D=subHoods&s%5B%5D=salePrice&s%5B%5D=dateListed&s%5B%5D=ppsqft&s%5B%5D=neighborhood2&s%5B%5D=type2&type=json&uniqueid=1548455410809')
-  // const res = await fetch('http://dev.cityrealty.com/rpc/search/get-sale-listings?f%5B%5D=priceRangeSale&f%5B%5D=location&f%5B%5D=bedroomFullMulti&f%5B%5D=saleBuildingTypeMulti&f%5B%5D=doorman&f%5B%5D=inContract&f%5B%5D=dateListed&f%5B%5D=priceChange&f%5B%5D=searchTerm&f%5B%5D=subHoods&s%5B%5D=salePrice&s%5B%5D=dateListed&s%5B%5D=ppsqft&s%5B%5D=neighborhood2&s%5B%5D=type2&type=json&uniqueid=1548455527189')
-  const resFilters = await fetch('http://dev.cityrealty.com/rpc/search/get-sale-listings?f%5B%5D=priceRangeSale&f%5B%5D=location&f%5B%5D=bedroomFullMulti&f%5B%5D=saleBuildingTypeMulti&f%5B%5D=doorman&f%5B%5D=inContract&f%5B%5D=dateListed&f%5B%5D=priceChange&f%5B%5D=searchTerm&f%5B%5D=subHoods&s%5B%5D=salePrice&s%5B%5D=dateListed&s%5B%5D=ppsqft&s%5B%5D=neighborhood2&s%5B%5D=type2&type=json&uniqueid=1541713539344')
+	let res = await fetch('https://a22d8b99-8ac2-4e32-92b1-8cfc23ff8b07.mock.pstmn.io/listings1');
+	// let resFilters = await fetch('https://a22d8b99-8ac2-4e32-92b1-8cfc23ff8b07.mock.pstmn.io/listings1');
 
-
-  // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
-  const data = await res.json()
-  const dataFilters = await resFilters.json()
+  let data = await res.json()
+  // let dataFilters = await resFilters.json()
 
   console.log(`Show data fetched. Count: ${data.items.length}`)
 
+
+
   return {
     data,
-    filters: dataFilters.tableTools.filters
+		filters: data.tableTools.filters
+    // filters: dataFilters.tableTools.filters
   }
 }
 
