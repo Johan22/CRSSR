@@ -9,7 +9,7 @@ class Search extends React.Component {
     super(props);
 		this.state = {};
 		this.state.test = "plop";
-		this.state.donnees = {};
+		this.state.donnees = props.data;
 		this.state.showPropsData = true;
 		this.loadResults();
   }
@@ -32,9 +32,7 @@ class Search extends React.Component {
 		});
   }
  componentDidMount() {
-		this.setState({
-			donnees: this.props.data
-		});
+	
  
  }
 
