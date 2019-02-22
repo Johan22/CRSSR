@@ -31,7 +31,14 @@ class Search extends React.Component {
 			showPropsData: false
 		});
   }
+ componentDidMount() {
+		this.setState({
+			donnees: this.props.data
+		});
+ 
+ }
 
+	
   render() {
     return (
       <Layout>
@@ -55,12 +62,7 @@ class Search extends React.Component {
 
 					))}
 
-          {this.state.showPropsData && this.props.data.items.map((listing) => (
-            <div className="listing-container" key={listing.listing_id}>
-              <Listing listing={listing}></Listing>
-            </div>
-
-          ))}
+      
         </div>
         <style jsx>{`
           h1, a {
