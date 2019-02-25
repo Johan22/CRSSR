@@ -9,16 +9,26 @@ class Search extends React.Component {
     super(props);
 		this.state = {};
 		this.state.test = "plop";
-		this.state.donnees = props.data;
-		this.state.showPropsData = true;
-		this.loadResults();
+
+		if (props.data) {
+			this.state.donnees = props.data;
+			this.state.filters = props.filters;
+		} else {
+			this.loadResults();
+		}
+
   }
 
 	async loadResults() {
+		const isBrowser = process.browser;
 
-		// this.setState({
-    //   test: "plop2"
-    // });
+		let res = await fetch('https://a22d8b99-8ac2-4e32-92b1-8cfc23ff8b07.mock.pstmn.io/listings1')
+		let data = await res.json()
+
+		this.setState({
+			donnees: data,
+			filters: data.tableTools.filters
+		});
 	}
 
   async loadOtherResults() {
@@ -26,17 +36,13 @@ class Search extends React.Component {
 		this.setState({
 			donnees: await res.json()
 		});
-
-		this.setState({
-			showPropsData: false
-		});
   }
- componentDidMount() {
-	
- 
- }
 
-	
+	componentDidMount() {
+
+	}
+
+
   render() {
     return (
       <Layout>
@@ -47,20 +53,20 @@ class Search extends React.Component {
             Load Other Results
           </button>
           <Filters
-            filters={this.props.filters}
+            filters={this.state.filters}
           >
           </Filters>
         </div>
 
         <div>
-					{this.state.donnees.items && this.state.donnees.items.map((listing) => (
+					{this.state.donnees && this.state.donnees.items && this.state.donnees.items.map((listing) => (
 						<div className="listing-container" key={listing.listing_id}>
 							<Listing listing={listing}></Listing>
 						</div>
 
 					))}
 
-      
+
         </div>
         <style jsx>{`
           h1, a {
@@ -92,22 +98,27 @@ class Search extends React.Component {
 
 
 Search.getInitialProps = async function() {
+	const isBrowser = process.browser;
 
-	let res = await fetch('https://a22d8b99-8ac2-4e32-92b1-8cfc23ff8b07.mock.pstmn.io/listings1');
-	// let resFilters = await fetch('https://a22d8b99-8ac2-4e32-92b1-8cfc23ff8b07.mock.pstmn.io/listings1');
+	if (!isBrowser) {
+		let res = await fetch('https://a22d8b99-8ac2-4e32-92b1-8cfc23ff8b07.mock.pstmn.io/listings1')
+		// let resFilters = await fetch('https://a22d8b99-8ac2-4e32-92b1-8cfc23ff8b07.mock.pstmn.io/listings1');
 
-  let data = await res.json()
-  // let dataFilters = await resFilters.json()
+	  let data = await res.json()
+	  // let dataFilters = await resFilters.json()
 
-  console.log(`Show data fetched. Count: ${data.items.length}`)
+	  console.log(`Show data fetched. Count: ${data.items.length}`)
 
 
 
-  return {
-    data,
-		filters: data.tableTools.filters
-    // filters: dataFilters.tableTools.filters
-  }
+	  return {
+	    data,
+			filters: data.tableTools.filters
+	    // filters: dataFilters.tableTools.filters
+  	}
+	}
+
+	return {}
 }
 
 export default Search

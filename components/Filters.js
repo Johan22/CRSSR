@@ -12,7 +12,7 @@ class Filters extends React.Component {
     return (
       <div className="filters">
 
-        {this.props.filters.map((filter) => (
+        {this.props.filters && this.props.filters.map((filter) => (
           <div className="filter-container">
             <div>{filter.name}</div>
 
