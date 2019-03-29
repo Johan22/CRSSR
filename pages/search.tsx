@@ -1,6 +1,6 @@
 import Layout from '../components/Layout.js'
 import fetch from 'isomorphic-unfetch'
-import Listing from '../components/Listing.js'
+import Listing from '../components/Listing.tsx'
 import Filters from '../components/Filters.js'
 
 // const Search = (props) => (

@@ -5,13 +5,16 @@ const layoutStyle = {
 	width: 1004
 }
 
-
 class Listing extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-  }
+    // console.log(props);
 
+		this.coucou(10);
+  }
+	coucou(x) {
+		console.log(x);
+	}
   render() {
     return (
 			<div className="clearfix">
