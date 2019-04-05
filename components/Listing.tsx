@@ -12,7 +12,7 @@ class Listing extends React.Component {
 
 		this.coucou(10);
   }
-	coucou(x) {
+	coucou(x: number) {
 		console.log(x);
 	}
   render() {
